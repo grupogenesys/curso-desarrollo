@@ -1,0 +1,12 @@
+Tarea para el 18/04/2020
+
+Arreglo de objetos 6 Registros inciales
+Un registro debe tener dentro del nombre la palabra 'Pedro'
+jsonArray : [
+  { id: 1, name: 'Juan Pérez', edad: 18 },
+]
+ - array.push() 2 Elementos nuevos
+ - array.filter() Buscar los mayores de edad
+ - array.find() Buscar quien se llame Juan Pérez
+ - array.find() Buscar quien se el nombre contenga la palabra 'Pedro'
+ - array.splice() Eliminar el elemento en la posición 4
