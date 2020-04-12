@@ -1,4 +1,4 @@
-Tarea para el 18/04/2020
+Tarea para el 12/04/2020
 
 Arreglo de objetos 6 Registros inciales
 Un registro debe tener dentro del nombre la palabra 'Pedro'
@@ -8,5 +8,19 @@ jsonArray : [
  - array.push() 2 Elementos nuevos
  - array.filter() Buscar los mayores de edad
  - array.find() Buscar quien se llame Juan Pérez
- - array.find() Buscar quien se el nombre contenga la palabra 'Pedro'
+ - array.find() Buscar quien en su nombre tiene la palabra 'Pedro'
  - array.splice() Eliminar el elemento en la posición 4
+
+
+ Tarea para el 18/04/2020
+
+ https://jsonplaceholder.typicode.com/users
+
+ Descargar archivo JSON y guardarlo en el proyecto
+
+ - Obtener el usuario de la posición 3 asignándolo a la constante userData
+ - Modificar, el usuario con el "zipcode" 53919-4257 asignándole diferentes nombres de familiares
+  { id: 123456, relationship: "abz", nombre: "abc" }
+ - Agregar 3 atributos nuevos a los usuarios con ids entre 6 y 9 (incluídos)
+ - Filtrar los usuarios con id entre 6 y 9
+  

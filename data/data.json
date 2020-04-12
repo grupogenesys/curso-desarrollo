@@ -23,5 +23,15 @@
       "email": "mariaperez@gmail.com",
       "active": true
     }
+  ],
+  "user": [
+    { 
+      "id": 1,
+      "name": "Juan Pérez",
+      "email": "juanperez@gmail.com",
+      "profile": "admin",
+      "lastLogin": "2020-04-11T08:35:03",
+      "active": true
+    }
   ]
 }

@@ -7,5 +7,9 @@ module.exports = {
     { key: 'value2', id: 2},
     { key: 'value3', id: 3},
     { key: 'value1', id: 4}
-  ]
+  ],
+  fn: (name) => {
+    return `Mi nombre es ${name}`
+  },
+  date: new Date(),
 }

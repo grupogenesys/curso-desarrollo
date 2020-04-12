@@ -1,4 +1,6 @@
+
 const array = require('./data/array')
+const dataJson = require('./data/data.json')
 const intArray = array.intArray;
 const jsonArray = array.jsonArray;
 
