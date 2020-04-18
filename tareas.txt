@@ -24,3 +24,9 @@ jsonArray : [
  - Agregar 3 atributos nuevos a los usuarios con ids entre 6 y 9 (incluídos)
  - Filtrar los usuarios con id entre 6 y 9
   
+
+ Tarea para el 19/04/2020
+
+ Crear una tabla en la base de datos (Workbench)
+ Crear funcionalidad para crear, listar los registros de la tabla (Nodejs)
+ Crear la ruta con la funcionalidad de consultar / crear (Nodejs)

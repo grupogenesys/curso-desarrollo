@@ -12,6 +12,8 @@ const [userLogin] = user
 console.table(userLogin)
 // 'a' 'e' ['i', 'o', 'u']
 
+const [,,,userData] = ['a', 'e', 'i', 'o', 'u']
+
 
 // JSON
 // HTML, CSS, JS, JSON, (XML), TEXT, CSV
@@ -72,6 +74,16 @@ data.map(user => {
   if (user.id == 2) {
     Object.assign(user, { pets: ['Cheko', 'Chekis']})
   }
+
+  if(user.address.city.includes('Bogotá D.C')) {
+    
+  }
+
+  if([6,7,8,9,11,12,15].includes(user.id)) {
+
+  }
+
+
   return user
 })
 console.log('************************************************')
