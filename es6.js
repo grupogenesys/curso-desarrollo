@@ -12,6 +12,14 @@
     // TODO: Actions
   }
 
+  var mifuncion = function(a) {
+    return a + 1
+  }
+
+  const mifuncion = (a, b) => a + 1
+
+
+
  const person = new Person('Juan');
  const teacher = new Teacher()
 

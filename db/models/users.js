@@ -25,21 +25,68 @@ const getUsers = () => {
   })
 }
 
-const createUsers = () => {
+const createUser = (user) => {
+  return new Promise((resolve, reject) => {
+    try {
+      pool.getConnection((error, connection) => {
+        if (error) {
+          reject(error)
+        }
+
+        if (!connection) {
+          reject({message: "Error de conexión con base de datos"})
+        } else {
+          Object.assign(user, { created_at: new Date() })
+          connection.query('INSERT INTO USERS SET ?', user, (error, results) => {
+            if (error) {
+              reject(error)
+            }
+            connection.release()
+            resolve(results)
+          })
+        }
+      })
+    } catch( e ) {
+      reject(e)
+    }
+  })
 
 }
 
-const updateUsers = () => {
+const updateUser = (user, id) => {
+  return new Promise((resolve, reject) => {
+    try {
+      pool.getConnection((error, connection) => {
+        if (error) {
+          reject(error)
+        }
 
+        if (!connection) {
+          reject({message: "Error de conexión con base de datos"})
+        } else {
+          Object.assign(user, { updated_at: new Date() })
+          connection.query('UPDATE USERS SET ? WHERE id = ?', [user, id], (error, results) => {
+            if (error) {
+              reject(error)
+            }
+            connection.release()
+            resolve(results)
+          })
+        }
+      })
+    } catch( e ) {
+      reject(e)
+    }
+  })
 }
 
-const deleteUsers = () => {
+const deleteUser = () => {
 
 }
 
 module.exports = {
   getUsers,
-  createUsers,
-  updateUsers,
-  deleteUsers
+  createUser,
+  updateUser,
+  deleteUser
 }

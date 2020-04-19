@@ -30,3 +30,10 @@ jsonArray : [
  Crear una tabla en la base de datos (Workbench)
  Crear funcionalidad para crear, listar los registros de la tabla (Nodejs)
  Crear la ruta con la funcionalidad de consultar / crear (Nodejs)
+
+
+ Tarea para el 25/04/2020
+ 
+ Hacer los ajustes sugeridos en la tabla de cada uno
+ Consultar un registro (getUser) "SELECT * FROM USERS WHERE id = "
+ Buscar como se hace la eliminación de un registro (deleteUser)
