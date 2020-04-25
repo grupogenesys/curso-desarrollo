@@ -9,28 +9,37 @@ const execute = require('./excecute')
 
 class DB {
 
-  async static getOne () {
-    return await execute()
+  constructor(table) {
+    this.table = table
   }
 
-  async static getAll () {
-    return await execute()
+  async getOne (id) {
+    const sql = 'SELECT * FROM ?? WHERE id=?;'
+    return await execute(sql, [this.table, id])
   }
 
-  async static create() {
-    return await execute()
+  async getAll () {
+    const sql = 'SELECT * FROM ??;'
+    return await execute(sql, [this.table])
   }
 
-  async static update() {
-    return await execute()
+  async create(data) {
+    const sql = 'INSERT INTO ?? SET ?;'
+    return await execute(sql, [this.table, data])
   }
 
-  async static destroy() {
-    return await execute()
+  async update(data, id) {
+    const sql = 'UPDATE ?? SET ? WHERE id = ?;'
+    return await execute(sql, [this.table, data, id])
   }
 
-  async static query() {
-    return await execute()
+  async destroy(id) {
+    const sql = 'DELETE FROM ?? WHERE id=?;'
+    return await execute(sql, [this.table, id])
+  }
+
+  async query(sql, params) {
+    return await execute(sql, params)
   }
 }
 

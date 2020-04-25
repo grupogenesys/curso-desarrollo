@@ -11,41 +11,58 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hola mundo '})
 })
 
-app.get('/users', async (req, res) => {
+const DB = require('./db/db')
+const userDB = new DB('USERS')
+
+app.get('/users/:id', async (req, res) => {
   try {
-    const { getUsers } = require('./db/models/users')
-    const users = await getUsers()
+    const { params: { id }} = req
+    const [users] = await userDB.getOne(id)
     res.json({ users })
   } catch(error) {
     res.json({ error })
   }
 })
 
-app.post('/users', (req, res) => {
-  const data = req.body
-  const { createUser } = require('./db/models/users')
-  createUser(data)
-    .then( response => {
-      res.json({ status: 'ok', response })
-    })
-    .catch(error => {
-      res.json({ status: 'error', error })
-    })
+app.get('/users', async (req, res) => {
+  try {
+    const users = await userDB.getAll()
+    res.json({ users })
+  } catch(error) {
+    res.json({ error })
+  }
+})
+
+app.post('/users', async (req, res) => {
+  try {
+    const data = req.body
+    const response = await userDB.create(data)
+    res.json({ status: 'ok', response })
+  } catch(error) {
+    res.json({ status: 'error', error })
+  }
 })
 
 app.put('/users/:id', async (req, res) => {
   try {
-    const { body: user } = req
+    const { body: data } = req
     const { params: { id }} = req
-    const { updateUser } = require('./db/models/users')
-    const response = await updateUser(user, id)
+    const response = await userDB.update(data, id)
     res.json({ status: 'ok', response })
   } catch (error) {
     res.json({ status: 'error', error })
   }
 })
 
-
+app.delete('/users/:id', async (req, res) => {
+  try {
+    const { params: { id }} = req
+    const response = await userDB.destroy(id)
+    res.json({ status: 'ok', response })
+  } catch(error) {
+    res.json({ status: 'error', error })
+  }
+})
 
 
 app.listen(port, () => {
