@@ -25,11 +25,13 @@ class DB {
 
   async create(data) {
     const sql = 'INSERT INTO ?? SET ?;'
+    Object.assign(data, { created_at: new Date() })
     return await execute(sql, [this.table, data])
   }
 
   async update(data, id) {
     const sql = 'UPDATE ?? SET ? WHERE id = ?;'
+    Object.assign(data, { updated_at: new Date() })
     return await execute(sql, [this.table, data, id])
   }
 
