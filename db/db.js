@@ -30,7 +30,7 @@ class DB {
   }
 
   async update(data, id) {
-    const sql = 'UPDATE ?? SET ? WHERE id = ?;'
+    const sql = 'UPDATE ?? SET ? WHERE id=?;'
     Object.assign(data, { updated_at: new Date() })
     return await execute(sql, [this.table, data, id])
   }
@@ -40,8 +40,8 @@ class DB {
     return await execute(sql, [this.table, id])
   }
 
-  async query(sql, params) {
-    return await execute(sql, params)
+  static query(sql, params) {
+    return execute(sql, params)
   }
 }
 

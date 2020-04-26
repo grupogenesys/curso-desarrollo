@@ -13,7 +13,6 @@ const execute = async (sql, params = []) => {
       pool.getConnection((error, connection) => {
 
         if (error || !connection) {
-          console.log('Error:', error)
           reject(error)
         }
 
@@ -24,9 +23,7 @@ const execute = async (sql, params = []) => {
           connection.release()
           resolve(results)
         })
-
         console.log(query.sql)
-
       })
     } catch(error) {
       reject(error)
