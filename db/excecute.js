@@ -11,7 +11,6 @@ const execute = async (sql, params = []) => {
   return new Promise((resolve, reject) => {
     try {
       pool.getConnection((error, connection) => {
-
         if (error || !connection) {
           reject(error)
         }

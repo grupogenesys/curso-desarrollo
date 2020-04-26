@@ -4,6 +4,7 @@ const express = require('express')
 const router = express.Router()
 
 const DB = require('../../db/db')
+const jwt = require('../../jwt/jwt')
 
 router
   .post('/auth', async (req, res) => {
@@ -36,6 +37,11 @@ router
             ['USERS', new Date(), user.id]
           )
           delete user['access']
+          const token = jwt.createToken(user)
+          if (token) {
+            res.setHeader('Authorization', `Bearer ${token}`)
+          }
+          console.log('Token: ', token)
           res.json(user)
         }
       }
