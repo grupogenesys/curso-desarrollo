@@ -10,7 +10,7 @@ module.exports = ({
       const payload = {
         sub: encryptor.encrypt(user),
         name: user.name,
-        iat: moment().add(3, 'hour').unix()
+        iat: moment().add(20, 'minute').unix()
       }
       return jwt.sign(payload, process.env.JWT_SESSION)
     } catch(e) {
@@ -18,8 +18,24 @@ module.exports = ({
     }
   },
 
-  validateToken: (token) => {
-
+  isAuth: (req, res, next) => {
+    try {
+      const { headers, headers: { authorization } } = req
+        if(!authorization) {
+          res.status(403).json({ status: 'error', error: 'Acceso no permitido' })
+        } else {
+          const token = authorization.split(' ').pop();
+          const payload = jwt.verify(token, process.env.JWT_SESSION)
+          if(!payload || payload && payload.iat < moment().unix()) {
+            res.status(401).json({ status: 'error', error: 'Acceso no permitido' })
+          } else {
+            req.body.user = encryptor.decrypt(payload.sub)
+            next()
+          }
+        }
+    } catch (error) {
+      res.status(403).json({ status: 'error', error: 'Acceso no permitido' })
+    }
   }
 
 })

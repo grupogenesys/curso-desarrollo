@@ -11,5 +11,12 @@
     "required": {
       "name": "nombre"
     }
+  },
+  "profile": {
+    "allowed": ["name", "description", "status"],
+    "required": {
+      "name": "nombre",
+      "description": "descripción"
+    }
   }
 }

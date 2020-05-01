@@ -5,6 +5,12 @@ const router = express.Router()
 const DB = require('../../db/db')
 const db = new DB('BRANDS')
 const validator = require('../../validate/validator')
+const jwt = require('../../jwt/jwt')
+
+const refreshToken = (user, res) => {
+  const token = jwt.createToken(user);
+  res.setHeader('Authorization', `Bearer ${token}`)
+}
 
 router
   .get('/brands', async (req, res) => {
@@ -24,8 +30,9 @@ router
       res.json({ status: 'error', error })
     }
   })
-  .post('/brands', async (req, res) => {
+  .post('/brands', jwt.isAuth, async (req, res) => {
     try {
+      refreshToken(req.body.user, res)
       const data = validator('brand').cleanData(req.body)
       const errors = validator('brand').isValid(data)
       if(errors) {
@@ -40,10 +47,15 @@ router
   })
   .put('/brands/:id', async (req, res) => {
     try {
-      const { body: data } = req
       const { params: { id }} = req
-      const response = await db.update(data, id)
-      res.json({ status: 'ok', response })
+      const data = validator('brand').cleanData(req.body)
+      const errors = validator('brand').isValid(data)
+      if(errors) {
+        res.json({ status: 'error', error: errors })
+      } else {
+        const response = await db.update(data, id)
+        res.json({ status: 'ok', response })
+      }
     } catch (error) {
       res.json({ status: 'error', error })
     }
