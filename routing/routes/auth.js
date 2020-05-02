@@ -7,13 +7,16 @@ const DB = require('../../db/db')
 const jwt = require('../../jwt/jwt')
 const validator = require('../../validate/validator')
 
+const Response = require('../reponse')
+
 router
   .post('/auth', async (req, res) => {
+    const error = { error: 'Datos de acceso incorrectos' }
     try {
       const data = validator('auth').cleanData(req.body)
       const errors = validator('auth').isValid(data)
       if(errors) {
-        res.json({ status: 'error', error: errors })
+        Response.error(res, errors)
       } else {
         const { username, password } = data
         const sql = `
@@ -32,11 +35,11 @@ router
         `
         const [user] = await DB.query(sql, username)
         if(!user){
-          res.json({ status: 'error', error: 'Datos de acceso incorrectos' })
+          Response.error(res, error, 404)
         } else {
           const validatePassword = bcrypt.compareSync(password, user.access)
           if(!validatePassword) {
-            res.json({ status: 'error', error: 'Datos de acceso incorrectos' })
+            Response.error(res, error, 404)
           } else {
             await DB.query(
               `UPDATE ?? SET last_login=? WHERE id=?;`,
@@ -48,12 +51,12 @@ router
               res.setHeader('Authorization', `Bearer ${token}`)
             }
             console.log('Token: ', token)
-            res.json(user)
+            Response.succes(res, user)
           }
         }
       }
     } catch(error) {
-      res.json({ status: 'error', error: 'Datos de acceso incorrectos' })
+      Response.error(res, error)
     }
   })
 

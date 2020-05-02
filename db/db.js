@@ -22,6 +22,15 @@ class DB {
     }
   }
 
+  async countOne (id) {
+    try {
+      const sql = 'SELECT COUNT(`id`) total FROM ?? WHERE id=?;'
+      return await execute(sql, [this.table, id])
+    } catch(error) {
+      return error
+    }
+  }
+
   async getAll () {
     try {
       const sql = 'SELECT * FROM ??;'
