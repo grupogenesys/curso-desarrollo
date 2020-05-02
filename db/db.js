@@ -14,34 +14,58 @@ class DB {
   }
 
   async getOne (id) {
-    const sql = 'SELECT * FROM ?? WHERE id=?;'
-    return await execute(sql, [this.table, id])
+    try {
+      const sql = 'SELECT * FROM ?? WHERE id=?;'
+      return await execute(sql, [this.table, id])
+    } catch(error) {
+      return error
+    }
   }
 
   async getAll () {
-    const sql = 'SELECT * FROM ??;'
-    return await execute(sql, [this.table])
+    try {
+      const sql = 'SELECT * FROM ??;'
+      return await execute(sql, [this.table])
+    } catch(error) {
+      return error
+    }
   }
 
   async create(data) {
-    const sql = 'INSERT INTO ?? SET ?;'
-    Object.assign(data, { created_at: new Date() })
-    return await execute(sql, [this.table, data])
+    try {
+      const sql = 'INSERT INTO ?? SET ?;'
+      Object.assign(data, { created_at: new Date() })
+      return await execute(sql, [this.table, data])
+    } catch(error) {
+      return error
+    }
   }
 
   async update(data, id) {
-    const sql = 'UPDATE ?? SET ? WHERE id=?;'
-    Object.assign(data, { updated_at: new Date() })
-    return await execute(sql, [this.table, data, id])
+    try {
+      const sql = 'UPDATE ?? SET ? WHERE id=?;'
+      Object.assign(data, { updated_at: new Date() })
+      return await execute(sql, [this.table, data, id])
+    } catch(error) {
+      return error
+    }
   }
 
   async destroy(id) {
-    const sql = 'DELETE FROM ?? WHERE id=?;'
-    return await execute(sql, [this.table, id])
+    try {
+      const sql = 'DELETE FROM ?? WHERE id=?;'
+      return await execute(sql, [this.table, id])
+    } catch(error) {
+      return error
+    }
   }
 
   static query(sql, params) {
-    return execute(sql, params)
+    try {
+      return execute(sql, params)
+    } catch(error) {
+      return error
+    }
   }
 }
 
